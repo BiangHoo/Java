@@ -1,14 +1,33 @@
 package demo;
 import java.util.*;
 import java.io.*;
-
 import org.jsoup.*;
 import org.jsoup.nodes.*;
-import org.jsoup.select.Elements;
+import org.jsoup.select.Elements; 
+
+/**
+ * @author Bangwen Chen
+ *
+ * 2014Äê2ÔÂ14ÈÕ
+ */
 public class DemoXML {
 	public static void main(String [] args){
 		List<HashMap<String,String>> list=new DemoXML().getRssList("m");
 		System.out.println(list.toString());
+		File file = new File("E:\\config.xml");
+		Document doc;
+		try {
+			doc = Jsoup.parse(file,"utf-8");
+			System.out.println("select..");
+			Elements m=doc.select("m");//find tag quickly by "select"
+			for(Element outline:m){
+				String name = outline.attr("name");
+				System.out.println(name);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	private List<HashMap<String,String>> getRssList(String id){
 		List<HashMap<String,String>> list =  new ArrayList<HashMap<String,String>>();
